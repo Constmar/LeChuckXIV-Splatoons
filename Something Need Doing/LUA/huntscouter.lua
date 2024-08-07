@@ -75,10 +75,6 @@ function startRoute(routeName, mobOne, mobTwo)
     yield("/visland resume")
 	yield("/wait 0.2")
     while IsVislandRouteRunning() do
-		if canSkip then
-			yield("/visland stop")
-			yield("/echo skipping")
-		end
         if not mob1 then
 			yield("/target " .. mobOne )
 			yield("/wait 0.2501")
@@ -96,11 +92,21 @@ function startRoute(routeName, mobOne, mobTwo)
 		if mob1 and mob2  then
 			canSkip = true
 		end
+		
 		yield("/wait 0.2503")
+		
+		if canSkip then
+			yield("/visland stop")
+			yield("/vnav stop")
+		end
     end
 end
 
 function tele(destination)
+	if IsVislandRouteRunning() or PathIsRunning() then
+		yield("/visland stop")
+		yield("/vnav stop")
+	end
     yield("/tp " .. destination)
     yield("/wait 7.006")
     while GetCharacterCondition(45) do
