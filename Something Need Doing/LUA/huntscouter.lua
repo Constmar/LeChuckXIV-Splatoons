@@ -1,7 +1,7 @@
 --[[
 
 	Dawntrail Hunt Scouter
-	v1.0
+	v1.1
 	By LechuckXIV
 	contains a modified instance change script courtesy of Prawellp's FATE script
 	
