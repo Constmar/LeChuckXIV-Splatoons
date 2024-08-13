@@ -1,8 +1,9 @@
-----Zone 1----
-
+Zone 1
+----
 N/A
 
-----Zone 2----
+Zone 2
+----
 
 --Phuucha--
 ```
@@ -35,13 +36,15 @@ yes i know it's a lot, there are lots of variations
 ~Lv2~{"Name":"Croak Chirp Ribbit 3","Group":"The Raintriller","ZoneLockH":[1188],"DCond":5,"ElementsL":[{"Name":"chirp","type":1,"Enabled":false,"radius":12.0,"refActorNPCNameID":13442,"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0},{"Name":"ribbit","type":1,"radius":10.0,"Donut":30.0,"refActorNPCNameID":13442,"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0},{"Name":"croak","type":4,"Enabled":false,"radius":30.0,"coneAngleMin":-135,"coneAngleMax":135,"refActorNPCNameID":13442,"refActorComparisonType":6,"includeRotation":true,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0}],"UseTriggers":true,"Triggers":[{"Type":2,"Duration":3.1,"MatchIntl":{"En":"Croak! Chirp! Ribiiit!"},"MatchDelay":12.8}]}
 ```
 
-----Zone 3----
+Zone 3
+----
 --Starcrier--
 ```
 ~Lv2~{"Name":"Starcrier","Group":"DT Hunts","ZoneLockH":[1189],"ElementsL":[{"Name":"","type":1,"radius":8.0,"refActorNPCNameID":12692,"refActorRequireCast":true,"refActorCastId":[37038,38571],"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0},{"Name":"","type":1,"radius":8.0,"Donut":15.0,"refActorNPCNameID":12692,"refActorRequireCast":true,"refActorCastId":[37039],"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0},{"Name":"","type":3,"refY":40.0,"radius":2.5,"refActorNPCNameID":12692,"refActorRequireCast":true,"refActorCastId":[37305,38293],"refActorComparisonType":6,"includeRotation":true,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0}]}
 ```
 
-----Zone 4----
+Zone 4
+----
 --Lizard--
 ```
 ~Lv2~{"Name":"Keheniheyamewi","Group":"DT Hunts","ZoneLockH":[1190],"ElementsL":[{"Name":"","type":1,"radius":15.0,"refActorNPCNameID":13401,"refActorRequireCast":true,"refActorCastId":[16224,16981,27411,32975,38651,40063],"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0},{"Name":"","type":1,"radius":10.0,"Donut":30.0,"refActorNPCNameID":13401,"refActorRequireCast":true,"refActorCastId":[38650,39807],"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0}]}
@@ -50,6 +53,10 @@ yes i know it's a lot, there are lots of variations
 ~Lv2~{"Name":"Keheniheyamewi","Group":"DT Hunts","ZoneLockH":[1190],"ElementsL":[{"Name":"","type":1,"radius":15.0,"refActorNPCNameID":13401,"refActorRequireCast":true,"refActorCastId":[16224,16981,27411,32975,38651,40063],"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0},{"Name":"","type":1,"radius":10.0,"Donut":30.0,"refActorNPCNameID":13401,"refActorRequireCast":true,"refActorCastId":[38650,39807],"refActorComparisonType":6,"refActorTetherTimeMin":0.0,"refActorTetherTimeMax":0.0}]}
 ```
 
-----Zone 5----
+Zone 5
+----
+WIP
 
-----Zone 6----
+Zone 6
+----
+WIP
