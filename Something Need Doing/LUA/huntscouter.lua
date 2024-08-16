@@ -1,11 +1,12 @@
 --[[
 
 Hunt Scouter
-v1.4a
+v1.4b
 By LechuckXIV
 contains a modified instance change script courtesy of Prawellp's FATE script
 
 Requirements:
+Teleporter plugin
 VIsland for routes
 VNavMesh for pathing
 
@@ -18,9 +19,10 @@ Ensure you're recording a train
 Start script, it will teleport you to the start and run it until it finishes
 
 Changelog:
+1.4b fix canSkip check to work on tp and instance change, veried that EW/ShB routes are working
 1.4a Add dependency check
-1.4 Added Shadwobringers support (full route not tested)
-1.3 Added Endwalker support (full route not tested)
+1.4 Added Shadwobringers support (Working)
+1.3 Added Endwalker support (Working)
 1.2b enter house
 1.2a route optimisation
 1.2 Teleport Validation, main function optimisation, fix detection of mobs to use object table isntead of targeting
@@ -33,7 +35,7 @@ maxInstances = 3
 gohome = true
 homeTP = "Estate"
 doorPath = "" --visland path to door
-expansion = "DT" --DT/EW/ShB Currently Supported(case sensitve)
+expansion = "DT" --DT/EW/ShB Currently Supported (case sensitve)
 
 
 --Editing anything below is not supported
@@ -69,7 +71,7 @@ ahn = "H4sIAAAAAAAACu2aW0/bMBTHv8rk52L5dnzJG+oAsQnGoBO7aA9hNTRSE7PW3YQQ333HuQAdH
 mheg = "H4sIAAAAAAAACu2a3U7bMBTHX2XydbD8/ZG7qQPUTTAGndiYdhFW00ZqYtY6mxDi3Xccp0DHI9i5iX2U2MfOT/9jH+cRnTedQzWab96drd0KVeh064d7sHztV7HklmA78X6JalKhs6Yfms1YXDTblQunTVi77Ty4bjReNw/3vu3DDtU/HtGF37Wh9T2qH9E3VB9xwTG3SlToO6o1wVZxIWWFblAtKcPMGsKfoOp7N/+AakNVhS6bZTtAcxzH7v0f17k+oJpW6AK6vmt7cCxsB1eheR/ctvkVrtuw/hzfJ4e2aaTo0PqfjyR2A96N95vxDh7t1v7v/iV4Fty5aza7V32ODYBPx50Pbt83TMpUfD8+MVW+DG4XXpev3O80uf52Ml8Ffz/z/XLyDCyf2s1m5oc4dKhd+iG4l/HM1k2Y+a5r4mREQ/T3umnDi6OxduK3h41G46Lt3NnuoHq8eDsZMAnz3cW66YPvnhuNXwDV/bDZADYjCG2/Wjzcg1vWxhfO/dI9Px0rH/0tNPdUvWWDSgs8EJ3gUBQTI4kdvwEXFCslhCps5MkGwZxyuIRMygFSoaSlSTkE0VhzrQsdedJhgA7FLE+6YbDkmibdkBBiDCdUFN3IkgzKWPz+Uu1DiqHEcjayoZnFWpGCRp5oHDGJlTZmYkNTTAklXI1sKKOwsJoV2ciTDQ7aIKRSKaQYCUIhTJINaQWmhtKCRp5oyDGkSLEng1BtpmUolwCNKWDkCYaC/IVUQicwKMQPo2wig8F+RSrDS2ojVzY4xBM+RROKJZV6BINSjrXRQhfRyBMMaQwmgk5kQI+KKTOiEdenRlCji2jkygYzWChjn2WDc8aFmOiAnJexsqxDc6XDgjwwxmyCQ2DCCASSBEfcozDKSz40TzZo3IhY2KMmNiA5rqicogqkPLCighU28mSDcwPJcp5kwxqQCWnJJBtaRm4kKWzkyYaMp6ycq7SFhUw5pszCsdpEBxVYw6lboSNPOoRk2ELC3Ex0SCy1USkpeiTgvw7LmCwZ8zzhYNrCclRM/24YBlkNOIVNbMAeFgvGTMmM5sDGz6d/2n+H9FImAAA="
 rak1 = "H4sIAAAAAAAACu2XzW7UMBDH38UXLqnl74/c0NJWC2op7aJCEQeXdXejbuIlcUBV1Xdn7Oy2XeANkpM9I3vm78lPY+cRnbvaoxK17v5NrO4dRQU6bUO/Bd/nZpVmfgm+kxCWqCQFOnNN7zZ5unDtysdTF9e+nUdfZ+e1e9iGqokdKr89oovQVbEKDSof0RdUHlHCMFeUEVWgr6jkWHFDORUFukElsxoLqS17AjM0fv4OlYbqAl26ZdVDQI6TgPDL176JqKQFuoDkd1UD0mLb+wLNm+hb9yNeV3H9Me0nh77dadGh9y+VJKUBdXm8ySMo6tbh934TrAU5d27TvcqZA4Cm4zpEv88NZdlN3+YVO+NT77v4en7lfw7lDbc791UM21loljtl4PlQbTaz0Kejg3UZ+uhfzjNbuzgLde1SMZIj6b12VXwRmqyT0B4GTc5FVfuz7sA8XvxbDCjCvLtYuyaG+jlo+gKobPrNBsDJKFTNavGwBVnWpg3nYemfVyfjfbiFcE/Ff+iwAmtJLM8ZpcRKM2pl/ghUa8y0MXSCY5xwMAutwypjckYBpHCumc5wWI45M0ZObIyTDWkoVtLsLhWONaFcDGgcGQKkWGEmNkbKBieYSqtzQkawUkzw4cFhBGaKSzX1jZGywYEHxgwd7hTGMJGMJFQADq4MtoQJPTWOccLBGAcANBN7OLiVmg2vUQWmlWRiY6RsCHhkSMJlTkjhv5RJTfiAhoQHh7KST31jnGxIw7DhfLhTqMCCSJ6CJDY0dBE9XSmjaBvfn/4A7XbZoV4TAAA="
 rak2 = "H4sIAAAAAAAACu2XzXKbMBDH30WXXohG30jcOm6ScTtJ3cQdt+n0oNSKzQSQC6KdjMfv3hUQJ24eAU5oF2n3r9VvFrFH17Z0KEO1fXwX8kfLUIIua9/uwPe12sSRW4Pvwvs1ykiCrmzV2qIbLm29ceHShq2r58GVnXNln3Y+r0KDsh97tPBNHnJfoWyPvqGMa4YVITpB31EmGE45EzRBdyg7o0ZgrhSVB7B95eYfUKZpmqAbu85biMZxzO7/uNJVAWWwbAGZH/IKdIW6dQmaV8HV9ldY5WH7Oa4np75hq+jU+59EEtOAuu551z1BUbP1f58XwVyQ82CL5lXOLgBoOi99cM+5oSbD8H03YzC+tK4Jr8e37ndfW38/uG+D3818tR6UgedTXhQz38atg3Xj2+Be9jPb2jDzZWljMaIj6l3ZPLwIjdaFr0+DRucyL91Vc2KeL98WA4owbxZbWwVfHoPGE0BZ1RYFUNNxkFeb5dMOZBkTF1z7tTvOjsZHfw/hDskbNKQkWEiSdvl4igEVxdPuCDTWqU5TNZExSjIEF1gyJvumQbAhUqqeDKo0NkoLPqExSjQYp1hzTns2mMapkEaYjg1uFI6v0omNcbIh4PyFZqJLSA2WhHDeocEIi680m9AYJxpEYUmFGdoGxURSLVR/EWVKYUopn74p44TDcEzhuqmGvkEwh7bB+sZxxrXCQM90FR0nGxJaAzv+v+KIiY4X04iGSA2mQpnpmzICNH4e/gF3wG01OhEAAA=="
-temp = "H4sIAAAAAAAACu2a227bOBCGX6XgtU3wMMOD7hbZtsgu0qaNi2y76IVaM7EAS3RtehdFkHfvUGaSpn0E8sqcgUSOqA//DEe+Y2/6MbCOrTbhxSqMu3BIbMFe7+NxR94P020ehTX5XsW4Zp1YsIt+Ovbbebjq97chve7TJuzPUxhn53X/fReHKR1Y9+8du4yHIQ1xYt0d+4d1iJ5L74RZsI+s09ZwI7RcsE+sWyohuQLn7smMUzj/k3VOugV736+HI82meV49/hfGMCXW0V2XtPLNMFFcaX8MC3Y+pbDvv6brIW3e5vvFc195WPbc+0uIIi9Dwc2/n+Zfiuiwif8/3ETXUjg3/fbw05rzBBTTyzGm8LA27UkZ/jFfUYx3R9rnn8dX4dtpb+OX4r5KcXcWp3WJjDx/D9vtWTzmRyfrfTym8PQ8Z5s+ncVx7PNmZEeO97of0lOg2XoV988nzc7VMIaLwzPz5er3zaBNOD9cbvopxfFx0vwGWDcdt1uiZuZgmG5X33cUlvf5hjdxHR6vzsZf8QtNd7/4DQ0lDUdhjZsXBLKkc25+BVIq7owVBhsbVbKhiQYttMLCBnBrJNoZDgscwKsmG3WigaC5VgCnjAKkFOCNP+nGUnEvSES0abpRJRzGaO4pqUCBw5OKiMKGU9wiStvQqBINC5Yr4x7QUIJTWskqMuuG1BzQ2KYblcIhPHcSVGEDuMRCBoDjGpRvZNRJBoLiSj/VoaDhVIYuUSsu0LY6tE4wQFH3Aq0+kZH1A9UJDGMkRzCyFRp1gmGRTiFGlWQCBIMWqoiGE8C9162xUalqKFIN50kuTv1Qb6mxoUo/FHJnw7VCo04ylkh1pvUeSkZRmlMDtDRElwQJ1w4BWlKpkw6pqdxwIItuGCo9PUIRDio4pPGqsVEnG0pr7kgcSimKHKkFWg4paDmia7VopWig0By9yTjMbFC3XAtTehvW5aRim25UCofJH+cdavMoHFJYLAUHasopVrecUicbICUHo1z544ZB+ngCvpxiqRChYtW1r/OVwkHvnjulzCmrZMs/6IYUhluL7RhbBRuf738AXSUrHFImAAA="
+temp = "H4sIAAAAAAAACu2a247TMBCGXwX5urV8mPEhd2g5LQhYoNJyEBeBNTRSE5fWBaHVvjvj1N1l4RHsq2Ss2J7Yn/4ZT3LNXvVjYB1brcODVRi3YZ/Ygj3dxcOWWp8dprQn+0mMV6wTC/aynw79Zr5d9bvvIT3t0zrszlMY58bL/vc2DrlT9+maXcT9kIY4se6avWcdoufSO2EW7APrtDXcCC0X7CPrlkpIrsC5GzLjFM4fsc5Jt2Bv+6vhQKNpnmePP8MYpsQ66nVBM38bJvIr7Q5hwc6nFHb913Q5pPXr3F/cbysvyu63/uOiyNOQc/P143wlj/br+OvUiZ4ld771m/1fc84DkE+Px5jCaW5ak3L7cH6iGG8OtMZ/378LP45rG7+U5ncpbs/idFU8o5YXw2ZzFmk3ZuttPKRw9z5n6z6dxXHs82LkhuzvZT+kO0ez9STu7g+aG1fDGF7u75mPV/8vBi3C+f5i3U8pjreD5h1g3XTYbIiYmYNh+r76vSW3vM8dXsWrcPt0Np7HLzTczeI/NJQ0HIU1bp4QyJLOuXkLpFTcGSsMNjaqZEMTDVpohYUN4NZItDMcFjiAV0026kQDQXOtAI4RBUgpwBt/1I2l4l6QiGjTdKNKOIzR3FNQgQKHJxURhQ2nuEWUtqFRJRoWLFfGndBQglNYySoy64bUHNDYphuVwiE8dxJUYQO4xEIGgOMalG9k1EkGguJK3+WhoOGYhi5RKy7Qtjy0TjBAUfUCrT6SkfUD1REMYyRHMLIlGnWCYZFOIUaVYAIEgxaqiIYTwL3XrbBRqWooUg3nSS6O9VBvqbChSj0UcmXDtUSjTjKWSHmm9R5KRFGaUwG0FESXBAnXDgFaUKmTDqkp3XAgi24YSj09QhEOSjik8aqxUScbSmvuSBxKKoocqQRaDiloOaJruWilaKDQHL3JOMxsULVcC1NqG9bloGKbblQKh8kf5x1qcyscUlgsCQdqiilWt5hSJxtoqe5lhDwJB1KEEbacYo1wHK0ULRutlA6QkoNRrvzWY5A+rYEvdFCaSkcZ1/7dqBQO2nvulDJH6ciWP0UVKQy3FluRowo2Pt/8AeFHcilsKAAA"
 
 -- A Ranks --
 if expansion == "DT" then
@@ -101,10 +103,10 @@ a12 = "Arch-Eta"
 elseif expansion == "ShB" then
 a1 = "Nuckelavee"
 a2 = "Nariphon"
-a3 = "Maliktender"
-a4 = "Sugaar"
-a5 = "Li'l Murderer"
-a6 = "Huracan"
+a3 = "Li'l Murderer"
+a4 = "Huracan"
+a5 = "Maliktender"
+a6 = "Sugaar"
 a7 = "The Mudman"
 a8 = "O Poorest Pauldia"
 a9 = "Supay"
@@ -125,38 +127,38 @@ a10 = "Sum"
 a11 = "Mahisha"
 a12 = "Luminare"
 else
-	yield("/echo Unsupported Expansion")
+yield("/echo Unsupported Expansion")
 end
 
 --Zone IDs
 if expansion == "DT" then
-	z1 = 1187 --Urqopacha
-	z2 = 1188 --Kozama'uka
-	z3 = 1189 --Yak T'el
-	z4 = 1190 --Shaaloani
-	z5 = 1191 --Heritage Found
-	z6 = 1192 --Living Memory
+z1 = 1187 --Urqopacha
+z2 = 1188 --Kozama'uka
+z3 = 1189 --Yak T'el
+z4 = 1190 --Shaaloani
+z5 = 1191 --Heritage Found
+z6 = 1192 --Living Memory
 elseif expansion == "EW" then
-	z1 = 956 --Labyrinthos
-	z2 = 957 --Thavnair
-	z3 = 958 --Garlemald
-	z4 = 959 --Mare Lamentorum
-	z5 = 961 --Elpis
-	z6 = 960 --Ultima Thule
+z1 = 956 --Labyrinthos
+z2 = 957 --Thavnair
+z3 = 958 --Garlemald
+z4 = 959 --Mare Lamentorum
+z5 = 961 --Elpis
+z6 = 960 --Ultima Thule
 elseif expansion == "ShB" then
-	z1 = 813 --Lakeland
-	z2 = 814 --Kholusia
-	z3 = 815 --Ahn Araeng
-	z4 = 816 --Il Mheg
-	z5 = 817 --The Rak'tika Greatwood
-	z6 = 818 --The Tempest
+z1 = 813 --Lakeland
+z2 = 814 --Kholusia
+z3 = 815 --Ahn Araeng
+z4 = 816 --Il Mheg
+z5 = 817 --The Rak'tika Greatwood
+z6 = 818 --The Tempest
 elseif expansion == "SB" then
-	z1 = 0
-	z2 = 0
-	z3 = 0
-	z4 = 0
-	z5 = 0
-	z6 = 0
+z1 = 0
+z2 = 0
+z3 = 0
+z4 = 0
+z5 = 0
+z6 = 0
 end
 
 mob1 = false
@@ -166,22 +168,22 @@ canRun = false
 
 -- Setup --
 function checkDeps()
-	deps = 0
-	if HasPlugin("TeleporterPlugin") then deps = deps + 1 end
-	if HasPlugin("visland") then deps = deps + 1 end
-	if HasPlugin("vnavmesh") then deps = deps + 1 end
-	if deps == 3 then canRun = true end	
+deps = 0
+if HasPlugin("TeleporterPlugin") then deps = deps + 1 end
+if HasPlugin("visland") then deps = deps + 1 end
+if HasPlugin("vnavmesh") then deps = deps + 1 end
+if deps == 3 then canRun = true end
 end
 
 function startRoute(routeName, mobOne, mobTwo)
     yield("/visland exectemponce " .. routeName)
     yield("/visland resume")
-	yield("/wait 0.2")
+    yield("/wait 0.2")
     while IsVislandRouteRunning() do
 		if DoesObjectExist(mobOne) then mob1 = true end
 		if DoesObjectExist(mobTwo) then mob2 = true end
 		if mob1 and mob2  then canSkip = true end
-		yield("/wait 0.2503")
+		yield("/wait 0.2567")
 		if canSkip then
 			yield("/visland stop")
 			yield("/vnav stop")
@@ -190,29 +192,33 @@ function startRoute(routeName, mobOne, mobTwo)
 end
 
 function tele(destination, zoneID)
-::teleStart::
-if IsVislandRouteRunning() or PathIsRunning() then
-	yield("/visland stop")
-	yield("/vnav stop")
-	while not IsPlayerAvailable() do
+	::teleStart::
+	if IsVislandRouteRunning() or PathIsRunning() then
+		yield("/visland stop")
+		yield("/vnav stop")
+		while not IsPlayerAvailable() do
 		yield("/wait 1")
+		end
 	end
-end
 	if not IsMoving() then
 		yield("/tp " .. destination)
 		yield("/wait 7.006")
 	else goto teleStart end
-    while GetCharacterCondition(45) do
-        yield("/wait 1.0015")
-    end
+	while GetCharacterCondition(45) do
+		yield("/wait 1.0015")
+	end
 	while not IsInZone(zoneID) do goto teleStart end
+	if canSkip and IsInZone(zoneID) then
+		mob1 = false
+		mob2 = false
+		canSkip = false
+	end
 end
 
 function changeInstance(destination, zoneID)
     yield("/wait 1.0003")
     yield("/target Aetheryte")
     yield("/wait 1.0014")
-
     while HasTarget() == false do
         if IsInZone(zoneID) then
             yield("/tp " .. destination)
@@ -249,146 +255,144 @@ function changeInstance(destination, zoneID)
     if GetCharacterCondition(45) then
         yield("/wait 1.0021")
     end
-
-mob1 = false
-mob2 = false
-canSkip = false
+	mob1 = false
+	mob2 = false
+	canSkip = false
 end
 
 -- Starts Here --
 checkDeps()
 if canRun then
-if expansion == "DT" then
-	-- Zone 1 --
-	for i=1,maxInstances,1 do
-		tele("Wachunpelo", z1)
-		changeInstance(i, z1)
-		startRoute(wachu1, a1, a2)
-	end
-	-- Zone 2 --
-	for i=1,maxInstances,1 do
-		tele("Earthenshire", z2)
-		changeInstance(i, z2)
-		startRoute(koza1, a3, a4)
+	if expansion == "DT" then
+		-- Zone 1 --
+		for i=1,maxInstances,1 do
+			tele("Wachunpelo", z1)
+			changeInstance(i, z1)
+			startRoute(wachu1, a1, a2)
+		end
+		-- Zone 2 --
+		for i=1,maxInstances,1 do
+			tele("Earthenshire", z2)
+			changeInstance(i, z2)
+			startRoute(koza1, a3, a4)
+			if not canSkip then
+				tele("hanu", z2)
+				startRoute(koza2, a3, a4)
+			end
+			if not canSkip then
+				tele("Fires", z2)
+				startRoute(koza3, a3, a4)
+			end
+		end
+		-- Zone 3 --
+		for i=1,maxInstances,1 do
+			tele("Mamook", z3)
+			changeInstance(i, z3)
+			startRoute(yak1, a5, a6)
+			if not canSkip then
+				tele("Iq", z3)
+				startRoute(yak2, a5, a6)
+			end
+		end
+		-- Zone 4 --
+		for i=1,maxInstances,1 do
+			tele("HHus", z4)
+			changeInstance(i, z4)
+			startRoute(shaa1, a7, a8)
+			if not canSkip then
+				tele("Mehw", z4)
+				startRoute(shaa2, a7, a8)
+			end
+		end
+		--Zone 5 --
+		for i=1,maxInstances,1 do
+			tele("Outsk", z5)
+			changeInstance(i, z5)
+			startRoute(hf1, a9, a10)
+			if not canSkip then
+				tele("Electrope", z5)
+				startRoute(hf2, a9, a10)
+			end
+		end
+		-- Zone 6 --
+		for i=1,maxInstances,1 do
+			tele("Mnemo", z6)
+			changeInstance(i, z6)
+			startRoute(lm1, a11, a12)
+			if not canSkip then
+				tele("Aero", z6)
+				startRoute(lm2, a11, a12)
+			end
+		end
+	elseif expansion == "EW" then
+		-- Zone 1 --
+		tele("Arche", z1)
+		startRoute(lab1, a1, a2)
 		if not canSkip then
-		tele("hanu", z2)
-		startRoute(koza2, a3, a4)
+			tele("Sharlayan Hamlet", z1)
+			startRoute(lab2, a1, a2)
+		end
+		-- Zone 2 --
+		tele("Yedli", z2)
+		startRoute(thav, a3, a4)
+		-- Zone 3 --
+		tele("Camp Broken Glass", z3)
+		startRoute(garl, a5, a6)
+		-- Zone 4 --
+		tele("Sinus Lac", z4)
+		startRoute(moon, a7, a8)
+		--Zone 5 --
+		tele("Twelve", z5)
+		startRoute(elp, a9, a10)
+		-- Zone 6 --
+		tele("Reah", z6)
+		startRoute(space1, a11, a12)
+		if not canSkip then
+			tele("Abode", z6)
+			startRoute(space2, a11, a12)
 		end
 		if not canSkip then
-		tele("Fires", z2)
-		startRoute(koza3, a3, a4)
+			tele("Abode", z6)
+			startRoute(space3, a11, a12)
 		end
-	end
-	-- Zone 3 --
-	for i=1,maxInstances,1 do
-		tele("Mamook", z3)
-		changeInstance(i, z3)
-		startRoute(yak1, a5, a6)
+	elseif expansion == "ShB" then
+		-- Zone 1 --
+		tele("jobb", z1)
+		startRoute(lake, a1, a2)
+		-- Zone 2 --
+		tele("tomra", z2)
+		startRoute(khol, a1, a2)
+		-- Zone 3 --
+		tele("Souq", z3)
+		startRoute(ahn, a5, a6)
+		-- Zone 4 --
+		tele("lran", z4)
+		startRoute(mheg, a7, a8)
+		--Zone 5 --
+		tele("slith", z5)
+		startRoute(rak1, a9, a10)
 		if not canSkip then
-		tele("Iq", z3)
-		startRoute(yak2, a5, a6)
+			tele("fanow", z5)
+			startRoute(rak2, a9, a10)
 		end
-	end
-	-- Zone 4 --
-	for i=1,maxInstances,1 do
-		tele("HHus", z4)
-		changeInstance(i, z4)
-		startRoute(shaa1, a7, a8)
-		if not canSkip then
-		tele("Mehw", z4)
-		startRoute(shaa2, a7, a8)
-		end
-	end
-	--Zone 5 --
-	for i=1,maxInstances,1 do
-		tele("Outsk", z5)
-		changeInstance(i, z5)
-		startRoute(hf1, a9, a10)
-		if not canSkip then
-		tele("Electrope", z5)
-		startRoute(hf2, a9, a10)
-		end
-	end
-	-- Zone 6 --
-	for i=1,maxInstances,1 do
-		tele("Mnemo", z6)
-		changeInstance(i, z6)
-		startRoute(lm1, a11, a12)
-		if not canSkip then
-		tele("Aero", z6)
-		startRoute(lm2, a11, a12)
-		end
-	end
-elseif expansion == "EW" then
-	-- Zone 1 --
-	tele("Arche", z1)
-	startRoute(lab1, a1, a2)
-	if not canSkip then
-	tele("Sharlayan Hamlet", z1)
-	startRoute(lab2, a1, a2)
-	end
-	-- Zone 2 --
-	tele("Yedli", z2)
-	startRoute(thav, a3, a4)
-	-- Zone 3 --
-	tele("Camp Broken Glass", z3)
-	startRoute(garl, a5, a6)
-	-- Zone 4 --
-	tele("Sinus Lac", z4)
-	startRoute(moon, a7, a8)
-	--Zone 5 --
-	tele("Twelve", z5)
-	startRoute(elp, a9, a10)
-	-- Zone 6 --
-	tele("Reah", z6)
-	startRoute(space1, a11, a12)
-	if not canSkip then
-	tele("Abode", z6)
-	startRoute(space2, a11, a12)
-	end
-	if not canSkip then
-	tele("Abode", z6)
-	startRoute(space3, a11, a12)
-	end
-elseif expansion == "ShB" then
-	-- Zone 1 --
-	tele("jobb", z1)
-	startRoute(lake, a1, a2)
-	-- Zone 2 --
-	tele("tomra", z2)
-	startRoute(khol, a1, a2)
-	-- Zone 3 --
-	tele("Souq", z3)
-	startRoute(ahn, a5, a6)
-	-- Zone 4 --
-	tele("lran", z4)
-	startRoute(mheg, a7, a8)
-	--Zone 5 --
-	tele("slith", z5)
-	startRoute(rak1, a9, a10)
-	if not canSkip then
-	tele("fanow", z5)
-	startRoute(rak2, a9, a10)
-	end
-	-- Zone 6 --
-	tele("ondo", z6)
-	startRoute(temp, a11, a12)
-elseif expansion == "SB" then
+		-- Zone 6 --
+		tele("ondo", z6)
+		startRoute(temp, a11, a12)
+	elseif expansion == "SB" then
 
-end
-
-if gohome then
-	yield("/tp " .. homeTP)
-	if string.len(doorPath) >=1 then
-		yield("/wait 7")
-		while GetCharacterCondition(45) do yield("/wait 1.0015") end
-		yield("/visland exectemponce " .. doorPath)
-		yield("/wait 0.2501")
-		while IsVislandRouteRunning() do yield("/wait 1") end
-		yield("/target Entrance")
-		yield("/interact")
 	end
-end
+	if gohome then
+		yield("/tp " .. homeTP)
+		if string.len(doorPath) >=1 then
+			yield("/wait 7")
+			while GetCharacterCondition(45) do yield("/wait 1.0015") end
+			yield("/visland exectemponce " .. doorPath)
+			yield("/wait 0.2501")
+			while IsVislandRouteRunning() do yield("/wait 1") end
+			yield("/target Entrance")
+			yield("/interact")
+		end
+	end
 else
 	yield("/echo Dependencies not met, verify they are installed and enabled")
 end
