@@ -18,6 +18,7 @@ Ensure you're recording a train
 Start script, it will teleport you to the start and run it until it finishes
 
 Changelog:
+1.2b enter house
 1.2a route optimisation
 1.2 Teleport Validation, main function optimisation, fix detection of mobs to use object table isntead of targeting
 1.1 Minor fix
@@ -28,7 +29,7 @@ Changelog:
 maxInstances = 3
 gohome = true
 homeTP = "Estate"
---doorCoords = "67.880 16,999 10.594"
+doorPath = "" --visland path to door
 expansion = "DT"
 
 
@@ -259,6 +260,14 @@ for i=1,maxInstances,1 do
 end
 end
 if gohome then
-yield("/tp " .. homeTP)
+	yield("/tp " .. homeTP)
+	if string.len(doorPath) >=1 then
+		yield("/wait 7")
+		while GetCharacterCondition(45) do yield("/wait 1.0015") end
+		yield("/visland exectemponce " .. doorPath)
+		yield("/wait 0.2501")
+		while IsVislandRouteRunning() do yield("/wait 1") end
+		yield("/target Entrance")
+		yield("/interact")
+	end
 end
-
