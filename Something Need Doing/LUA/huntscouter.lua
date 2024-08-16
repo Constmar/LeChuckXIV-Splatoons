@@ -1,26 +1,37 @@
 --[[
 
-	Dawntrail Hunt Scouter
-	v1.1
-	By LechuckXIV
-	contains a modified instance change script courtesy of Prawellp's FATE script
-	
-	Requirements:
-	VIsland for routes
-	VNavMesh for pathing
-	
-	Soft Requirement:
-	Something to auto track hunt marks, "hunt helper" recommended
-	Optional: Scout Helper: to visualise your train
+Dawntrail Hunt Scouter
+v1.2
+By LechuckXIV
+contains a modified instance change script courtesy of Prawellp's FATE script
 
-	Instructions:
-	Ensure you're recording a train
-	Start script, it will teleport you to the start and run it until it finishes
+Requirements:
+VIsland for routes
+VNavMesh for pathing
 
+Soft Requirement:
+Something to auto track hunt marks, "hunt helper" recommended
+Optional: Scout Helper: to visualise your train
 
-	Editing anything below is not supported
+Instructions:
+Ensure you're recording a train
+Start script, it will teleport you to the start and run it until it finishes
+
+Changelog:
+1.2 Teleport Validation, main function optimisation, fix detection of mobs to use object table isntead of targeting, TODO: optimise routes to account for this
+1.1 Minor fix
+1.0 Initial Release
+
 ]]--
 
+maxInstances = 3
+gohome = true
+homeTP = "Estate"
+--doorCoords = "67.880 16,999 10.594"
+expansion = "DT"
+
+
+--Editing anything below is not supported
 
 -- Routes --
 wachu1 =
@@ -50,7 +61,6 @@ lm2 =
 
 --A Ranks
 
-
 a1 = "Queen Hawk"
 a2 = "Nechuciho"
 a3 = "The Raintriller"
@@ -64,6 +74,13 @@ a10 = "Urna Variabilis"
 a11 = "Sally the Sweeper"
 a12 = "Cat's Eye"
 
+--Zone IDs
+z1 = 1187 --Urqopacha
+z2 = 1188 --Kozama'uka
+z3 = 1189 --Yak T'el
+z4 = 1190 --Shaaloani
+z5 = 1191 --Heritage Found
+z6 = 1192 --Living Memory
 
 mob1 = false
 mob2 = false
@@ -75,26 +92,10 @@ function startRoute(routeName, mobOne, mobTwo)
     yield("/visland resume")
 	yield("/wait 0.2")
     while IsVislandRouteRunning() do
-        if not mob1 then
-			yield("/target " .. mobOne )
-			yield("/wait 0.2501")
-			if GetTargetName() == mobOne then
-				mob1 = true
-			end
-		end
-		if not mob2 then
-			yield("/target " .. mobTwo )
-			yield("/wait 0.2502")
-			if GetTargetName() == mobTwo then
-				mob2 = true
-			end
-		end
-		if mob1 and mob2  then
-			canSkip = true
-		end
-		
+		if DoesObjectExist(mobOne) then mob1 = true end
+		if DoesObjectExist(mobTwo) then mob2 = true end
+		if mob1 and mob2  then canSkip = true end
 		yield("/wait 0.2503")
-		
 		if canSkip then
 			yield("/visland stop")
 			yield("/vnav stop")
@@ -102,16 +103,23 @@ function startRoute(routeName, mobOne, mobTwo)
     end
 end
 
-function tele(destination)
-	if IsVislandRouteRunning() or PathIsRunning() then
-		yield("/visland stop")
-		yield("/vnav stop")
+function tele(destination, zoneID)
+::teleStart::
+if IsVislandRouteRunning() or PathIsRunning() then
+	yield("/visland stop")
+	yield("/vnav stop")
+	while not IsPlayerAvailable() do
+		yield("/wait 1")
 	end
-    yield("/tp " .. destination)
-    yield("/wait 7.006")
+end
+	if not IsMoving() then
+		yield("/tp " .. destination)
+		yield("/wait 7.006")
+	else goto teleStart end
     while GetCharacterCondition(45) do
         yield("/wait 1.0015")
     end
+	while not IsInZone(zoneID) do goto teleStart end
 end
 
 function changeInstance(destination)
@@ -125,11 +133,11 @@ function changeInstance(destination)
             yield("/wait 7.0007")
         end
         if IsInZone(1188) then --Kozama'uka
-            yield("/tp Ok'hanu")
+            yield("/tp Earthenshire")
             yield("/wait 7.0008")
         end
         if IsInZone(1189) then --Yak T'el
-            yield("/tp Iq Br'aax")
+            yield("/tp Mamook")
             yield("/wait 7.0009")
         end
         if IsInZone(1190) then --Shaaloani
@@ -163,20 +171,10 @@ function changeInstance(destination)
         end
     end
     yield("/gaction dismount")
-    if GetCharacterCondition(45) == false and destination == 1 then
+    if GetCharacterCondition(45) == false then
         yield("/wait 1.005")
-        yield("/li 1")
+        yield("/li " .. destination)
         yield("/wait 1.0017")
-    end
-    if GetCharacterCondition(45) == false and destination == 2 then
-        yield("/wait 1.5006")
-        yield("/li 2")
-        yield("/wait 1.0018")
-    end
-    if GetCharacterCondition(45) == false and destination == 3 then
-        yield("/wait 1.5007")
-        yield("/li 3")
-        yield("/wait 1.0019")
     end
     if GetCharacterCondition(45) == false and IsPlayerAvailable() == true then
         yield("/lockon off")
@@ -185,154 +183,80 @@ function changeInstance(destination)
     if GetCharacterCondition(45) then
         yield("/wait 1.0021")
     end
-	
-	mob1 = false
-	mob2 = false
-	canSkip = false
+
+mob1 = false
+mob2 = false
+canSkip = false
 end
 
 -- Starts Here --
-
+if expansion == "DT" then
 -- Zone 1 --
-tele("Wachunpelo")
-changeInstance(1)
-startRoute(wachu1, a1, a2)
-tele("Wachunpelo")
-changeInstance(2)
-startRoute(wachu1, a1, a2)
-tele("Wachunpelo")
-changeInstance(3)
-startRoute(wachu1, a1, a2)
-
+for i=1,maxInstances,1 do
+	tele("Wachunpelo", z1)
+	changeInstance(i)
+	startRoute(wachu1, a1, a2)
+end
 -- Zone 2 --
-tele("Earthenshire")
-changeInstance(1)
-startRoute(koza1, a3, a4)
-if not canSkip then
-	tele("hanu")
+for i=1,maxInstances,1 do
+	tele("Earthenshire", z2)
+	changeInstance(i)
+	startRoute(koza1, a3, a4)
+	if not canSkip then
+	tele("hanu", z2)
 	startRoute(koza2, a3, a4)
-end
-if not canSkip then
-	tele("Fires")
+	end
+	if not canSkip then
+	tele("Fires", z2)
 	startRoute(koza3, a3, a4)
+	end
 end
-tele("Earthenshire")
-changeInstance(2)
-startRoute(koza1, a3, a4)
-if not canSkip then
-	tele("hanu")
-	startRoute(koza2, a3, a4)
-end
-if not canSkip then
-	tele("Fires")
-	startRoute(koza3, a3, a4)
-end
-tele("Earthenshire")
-changeInstance(3)
-startRoute(koza1, a3, a4)
-if not canSkip then
-	tele("hanu")
-	startRoute(koza2, a3, a4)
-end
-if not canSkip then
-	tele("Fires")
-	startRoute(koza3, a3, a4)
-end
-
 -- Zone 3 --
-tele("Mamook")
-changeInstance(1)
-startRoute(yak1, a5, a6)
-if not canSkip then
-	tele("Iq")
+for i=1,maxInstances,1 do
+	tele("Mamook", z3)
+	changeInstance(i)
+	startRoute(yak1, a5, a6)
+	if not canSkip then
+	tele("Iq", z3)
 	startRoute(yak2, a5, a6)
-end
-tele("Mamook")
-changeInstance(2)
-startRoute(yak1, a5, a6)
-if not canSkip then
-	tele("Iq")
-	startRoute(yak2, a5, a6)
-end
-tele("Mamook")
-changeInstance(3)
-startRoute(yak1, a5, a6)
-if not canSkip then
-	tele("Iq")
-	startRoute(yak2, a5, a6)
+	end
 end
 
 -- Zone 4 --
-tele("HHus")
-changeInstance(1)
-startRoute(shaa1, a7, a8)
-if not canSkip then
-	tele("Mehw")
+for i=1,maxInstances,1 do
+	tele("HHus", z4)
+	changeInstance(i)
+	startRoute(shaa1, a7, a8)
+	if not canSkip then
+	tele("Mehw", z4)
 	startRoute(shaa2, a7, a8)
-end
-tele("HHus")
-changeInstance(2)
-startRoute(shaa1, a7, a8)
-if not canSkip then
-	tele("Mehw")
-	startRoute(shaa2, a7, a8)
-end
-tele("HHus")
-changeInstance(3)
-startRoute(shaa1, a7, a8)
-if not canSkip then
-	tele("Mehw")
-	startRoute(shaa2, a7, a8)
+	end
 end
 
 --Zone 5 --
-tele("Outsk")
-changeInstance(1)
+for i=1,maxInstances,1 do
+	tele("Outsk", z5)
+	changeInstance(i)
 
-startRoute(hf1, a9, a10)
-if not canSkip then
-	tele("Electrope")
+	startRoute(hf1, a9, a10)
+	if not canSkip then
+	tele("Electrope", z5)
 	startRoute(hf2, a9, a10)
-end
-tele("Outsk")
-changeInstance(2)
-
-startRoute(hf1, a9, a10)
-if not canSkip then
-	tele("Electrope")
-	startRoute(hf2, a9, a10)
-end
-tele("Outsk")
-changeInstance(3)
-
-startRoute(hf1, a9, a10)
-if not canSkip then
-	tele("Electrope")
-	startRoute(hf2, a9, a10)
+	end
 end
 
 -- Zone 6 --
-tele("Mnemo")
-changeInstance(1)
+for i=1,maxInstances,1 do
+	tele("Mnemo", z6)
+	changeInstance(i)
 
-startRoute(lm1, a11, a12)
-if not canSkip then
-	tele("Aero")
+	startRoute(lm1, a11, a12)
+	if not canSkip then
+	tele("Aero", z6)
 	startRoute(lm2, a11, a12)
+	end
 end
-tele("Mnemo")
-changeInstance(2)
-
-startRoute(lm1, a11, a12)
-if not canSkip then
-	tele("Aero")
-	startRoute(lm2, a11, a12)
 end
-tele("Mnemo")
-changeInstance(3)
-
-startRoute(lm1, a11, a12)
-if not canSkip then
-	tele("Aero")
-	startRoute(lm2, a11, a12)
+if gohome then
+yield("/tp " .. homeTP)
 end
