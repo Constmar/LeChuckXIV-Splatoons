@@ -1,7 +1,7 @@
 --[[
 
 Hunt Scouter
-v1.4b
+v1.5
 By LechuckXIV
 contains a modified instance change script courtesy of Prawellp's FATE script
 
@@ -19,6 +19,7 @@ Ensure you're recording a train
 Start script, it will teleport you to the start and run it until it finishes
 
 Changelog:
+1.5 Added Stormblood, add a check to see if zone changed with only one A rank found
 1.4b fix canSkip check to work on tp and instance change, veried that EW/ShB routes are working
 1.4a Add dependency check
 1.4 Added Shadwobringers support (Working)
@@ -35,7 +36,7 @@ maxInstances = 3
 gohome = true
 homeTP = "Estate"
 doorPath = "" --visland path to door
-expansion = "DT" --DT/EW/ShB Currently Supported (case sensitve)
+expansion = "DT" --DT/EW/ShB/SB Supported (case sensitve)
 
 
 --Editing anything below is not supported
@@ -72,6 +73,15 @@ mheg = "H4sIAAAAAAAACu2a3U7bMBTHX2XydbD8/ZG7qQPUTTAGndiYdhFW00ZqYtY6mxDi3Xccp0DH
 rak1 = "H4sIAAAAAAAACu2XzW7UMBDH38UXLqnl74/c0NJWC2op7aJCEQeXdXejbuIlcUBV1Xdn7Oy2XeANkpM9I3vm78lPY+cRnbvaoxK17v5NrO4dRQU6bUO/Bd/nZpVmfgm+kxCWqCQFOnNN7zZ5unDtysdTF9e+nUdfZ+e1e9iGqokdKr89oovQVbEKDSof0RdUHlHCMFeUEVWgr6jkWHFDORUFukElsxoLqS17AjM0fv4OlYbqAl26ZdVDQI6TgPDL176JqKQFuoDkd1UD0mLb+wLNm+hb9yNeV3H9Me0nh77dadGh9y+VJKUBdXm8ySMo6tbh934TrAU5d27TvcqZA4Cm4zpEv88NZdlN3+YVO+NT77v4en7lfw7lDbc791UM21loljtl4PlQbTaz0Kejg3UZ+uhfzjNbuzgLde1SMZIj6b12VXwRmqyT0B4GTc5FVfuz7sA8XvxbDCjCvLtYuyaG+jlo+gKobPrNBsDJKFTNavGwBVnWpg3nYemfVyfjfbiFcE/Ff+iwAmtJLM8ZpcRKM2pl/ghUa8y0MXSCY5xwMAutwypjckYBpHCumc5wWI45M0ZObIyTDWkoVtLsLhWONaFcDGgcGQKkWGEmNkbKBieYSqtzQkawUkzw4cFhBGaKSzX1jZGywYEHxgwd7hTGMJGMJFQADq4MtoQJPTWOccLBGAcANBN7OLiVmg2vUQWmlWRiY6RsCHhkSMJlTkjhv5RJTfiAhoQHh7KST31jnGxIw7DhfLhTqMCCSJ6CJDY0dBE9XSmjaBvfn/4A7XbZoV4TAAA="
 rak2 = "H4sIAAAAAAAACu2XzXKbMBDH30WXXohG30jcOm6ScTtJ3cQdt+n0oNSKzQSQC6KdjMfv3hUQJ24eAU5oF2n3r9VvFrFH17Z0KEO1fXwX8kfLUIIua9/uwPe12sSRW4Pvwvs1ykiCrmzV2qIbLm29ceHShq2r58GVnXNln3Y+r0KDsh97tPBNHnJfoWyPvqGMa4YVITpB31EmGE45EzRBdyg7o0ZgrhSVB7B95eYfUKZpmqAbu85biMZxzO7/uNJVAWWwbAGZH/IKdIW6dQmaV8HV9ldY5WH7Oa4np75hq+jU+59EEtOAuu551z1BUbP1f58XwVyQ82CL5lXOLgBoOi99cM+5oSbD8H03YzC+tK4Jr8e37ndfW38/uG+D3818tR6UgedTXhQz38atg3Xj2+Be9jPb2jDzZWljMaIj6l3ZPLwIjdaFr0+DRucyL91Vc2KeL98WA4owbxZbWwVfHoPGE0BZ1RYFUNNxkFeb5dMOZBkTF1z7tTvOjsZHfw/hDskbNKQkWEiSdvl4igEVxdPuCDTWqU5TNZExSjIEF1gyJvumQbAhUqqeDKo0NkoLPqExSjQYp1hzTns2mMapkEaYjg1uFI6v0omNcbIh4PyFZqJLSA2WhHDeocEIi680m9AYJxpEYUmFGdoGxURSLVR/EWVKYUopn74p44TDcEzhuqmGvkEwh7bB+sZxxrXCQM90FR0nGxJaAzv+v+KIiY4X04iGSA2mQpnpmzICNH4e/gF3wG01OhEAAA=="
 temp = "H4sIAAAAAAAACu2a247TMBCGXwX5urV8mPEhd2g5LQhYoNJyEBeBNTRSE5fWBaHVvjvj1N1l4RHsq2Ss2J7Yn/4ZT3LNXvVjYB1brcODVRi3YZ/Ygj3dxcOWWp8dprQn+0mMV6wTC/aynw79Zr5d9bvvIT3t0zrszlMY58bL/vc2DrlT9+maXcT9kIY4se6avWcdoufSO2EW7APrtDXcCC0X7CPrlkpIrsC5GzLjFM4fsc5Jt2Bv+6vhQKNpnmePP8MYpsQ66nVBM38bJvIr7Q5hwc6nFHb913Q5pPXr3F/cbysvyu63/uOiyNOQc/P143wlj/br+OvUiZ4ld771m/1fc84DkE+Px5jCaW5ak3L7cH6iGG8OtMZ/378LP45rG7+U5ncpbs/idFU8o5YXw2ZzFmk3ZuttPKRw9z5n6z6dxXHs82LkhuzvZT+kO0ez9STu7g+aG1fDGF7u75mPV/8vBi3C+f5i3U8pjreD5h1g3XTYbIiYmYNh+r76vSW3vM8dXsWrcPt0Np7HLzTczeI/NJQ0HIU1bp4QyJLOuXkLpFTcGSsMNjaqZEMTDVpohYUN4NZItDMcFjiAV0026kQDQXOtAI4RBUgpwBt/1I2l4l6QiGjTdKNKOIzR3FNQgQKHJxURhQ2nuEWUtqFRJRoWLFfGndBQglNYySoy64bUHNDYphuVwiE8dxJUYQO4xEIGgOMalG9k1EkGguJK3+WhoOGYhi5RKy7Qtjy0TjBAUfUCrT6SkfUD1REMYyRHMLIlGnWCYZFOIUaVYAIEgxaqiIYTwL3XrbBRqWooUg3nSS6O9VBvqbChSj0UcmXDtUSjTjKWSHmm9R5KRFGaUwG0FESXBAnXDgFaUKmTDqkp3XAgi24YSj09QhEOSjik8aqxUScbSmvuSBxKKoocqQRaDiloOaJruWilaKDQHL3JOMxsULVcC1NqG9bloGKbblQKh8kf5x1qcyscUlgsCQdqiilWt5hSJxtoqe5lhDwJB1KEEbacYo1wHK0ULRutlA6QkoNRrvzWY5A+rYEvdFCaSkcZ1/7dqBQO2nvulDJH6ciWP0UVKQy3FluRowo2Pt/8AeFHcilsKAAA"
+--SB
+fringe1 = "H4sIAAAAAAAACu2W327TMBTG38XXwfJ/x7lDZZsK2ihbUWGIC4+6baQkLokDmqq+O8dJ2q3sEZKr+Jzax59Pf/rsA7qzpUMZ2tR5tXUUJeim9u0eMl+rbRy5NeSuvV+jjCTo1latLbrh0tZbF25s2Ll6HlzZJVf2ee/zKjQo+3FAC9/kIfcVyg7oG8reKZZiQ4hWCfqOMio4FkITmaBH+FGSFKdSCnGE2Fdu/gFlirIE3dt13kJBjqMA/8eVrgqwPEEL2HyTVyAt1K1L0LwKrra/wioPu89xPbnMDWdFl9n/VJK4Dcjrvo/dFxQ1O//3tAjmgpyNLZpXe3YFQNNV6YM77Q1tGYbvuxlD8KV1TXg9fnC/+/b6pyH9EPx+5qv1oAwyn/KimPk2Hh2ie98G93Ke2c6GmS9LG5sRE1HvyubhRWiMrn19WTQml3npbpuL8Gr5thnQhHmz2Nkq+PJcNP4DKKvaogBwOhQAo+XzHmQZExfc+bU7z47BR/8E5Y7JWzqklpgpokVPB9dYSc16OAQ1WCvOJjhGCofgHRyMDXAQLIVOB+sQkmEtmZycY5xwMMqwUYLrHg6msaBE6R4OuEPgmlHpZB1jpYNRTLiisqeDcsxTavj52QF4MML4ZB7jxIMbg6N3nMxDAg7K0J4ORiSmgA6d6BgnHVIJeFqo/tmRamwkIaZjg3KFtZlsY6RgKKYw3Cyktw2tMJFc967BU4m5NHx6cYyBjZ/Hf79c7EdFEQAA"
+fringe2 = "H4sIAAAAAAAACu2XzW7bMAyA30VnVxD1L9+GrC2yoV3XZsjWYQd3URsDsZXZ8oai6LuXst2fbHsD+2SRkkiK/iBSD+S8qDzJyW1T1neek4ycNqHbo+ZLfZdGfoO6kxA2JGcZOSvqrtj1w1XR3Pl4WsStb5bRV71yXdzvQ1nHluTfH8hFaMtYhprkD+QryY+E4tQZBioj30juNGVGOp6Ra5IDSs4aZx9RDLVfvie5Bpy7LDZlh+YETe7Db1/5OuL6jFyg69uyxsBi0/mMLOvom+JnXJdx+yntZ4e68aTkUPtXjCy5weD673X/xYjabfjzvAnXYji3xa5947M3gDEdVyH6Z9+YlHH4rl8xCp8738a34yv/a0huuBnVVzHsF6HejJGh5mO52y1Cl46O0mXoon89z2JbxEWoqiIlIylSvOuijK+BJukkNIdGk3JVVv6sPRCPV/8mA5OwbC+2RR1D9WI0/QGS191uh9j0ICBEq/s9huVc2nAeNv5ldRI+hBs095j9hw2mqVJg+cAGgqIEtwMb0lAGwGY2JsoGl5wyJqQe2JAUhGWgezjwSpHOifnamCQaRlELnA2XBjBFwRgzgHEEQlMDxs1oTBIN0Io6cG5kA7CigNIjGxKQDSfndmOiJUVZRYXlcmDDYO8JMBaUIw5AueYwtxvTZENoTi1XMLAhBQVrmerZwIrCLCgu55oySTS4YpRb5cTABudUC8aGV4oAQ412gs9sTJMNrakeCwpYLChGiR4MiRPcODaDMU0wFMdeU/Lh8YptBuVKw/B2lfiUlUzNN8YEwPjx+AQGcPUSbRUAAA=="
+peaks = "H4sIAAAAAAAACu2azW7bOBDH34VnhyA5wyGp2yLbFGnRbrZNkd0WPSg1Gwu1Ra9Nb1EEefeOPtzUySOQJ3EGEmdI/cAh/9K9eNtuomjENrbf9mIhXu7SYcv2h/5uaMUl+y5SWopGLcSbtj+067F53e7uYn7Z5lXcXea4GZ037Y9t6vq8F82ne3GV9l3uUi+ae/GPaM6M05KU9Qvxr2gGA702sBAfReMwSEU2PLCV+nj5p2jIcIfv2mV34N5ADtHT/3ET+ywavRBXHPlr13NeeXeIC3HZ57hrv+SbLq/+Gp5Xp755mOLU+yRFNYTh5Mbrx/HKGe1X6fvxIb6X0/narve/xRw74JxebFKOx9g8J3Pzj/GO2fj7EPf59/b7+N80t+l2dr/PaXue+uWcGXted+v1eToMQx8mJR1yfBzP+arN52mzaYfJGBxDvjdtlx8THayLtDvtdHBed5v4Zn9ivrh+Phk8CZf7q1Xb57T51enwBkTTH9ZrpmbkoOvvrn9sOa0QhgfepmX8dfdgvEq33N3D4jkaTmvpkSyNEcGgDE7j+A7IOzacrmiUiYYlkIAzGNpLBGNHMCwhG8pUMAoFw4A0isy8ZCiJLuiRDLCeCw3oikahaJC2MgCFCQ08lnMDSjpeP6AuGWVy4YyRVjm0T8A4M4ELi0dXwSgTDCKSqMIzLiCAdGQRKxhlgmEhyBAInoJBihcMcqqCUSgYBokVCxgOqSdkgJWeFwyqe4xCwdA+SMJg51oCTiquIG6EQ3srAQL5Wk6KhMMBS1nKz9XEkwyEQJPMFZw0HgxVNIpEQweSwIVjUsfBGakU+RENZDlDh3o4KbSiaA+81UTSExmkpDUuTPXE8iaEz7N10SgUDRdY0JplLmukMcGa6YDCcqhFp0wtKMWygVKTwqM+TtLBXFDODH9TQ4B6RikVDS0h4BEN5STwEWXah56xqiENaqrKRplwmKCltqjm3zQCSu8UuUfZy5GrOnmZbKCz0gJXjpkNDqk0HNngj26EqrJRJhvE2pZCbaY/NQyrYAh6RgMd7zfQ2KptFIDG54eftVYwDFUoAAA="
+lochs = "H4sIAAAAAAAACu2Z32/TMBDH/xXk59ayff6ZN1S2qcDG2IoGQzxkq7dEauLSOKBp2v/OOUm3FfgPkqf4zol9cT7yfc95JGd55UlGVoV/8zHcFg2ZkZNdaLfo+1Lfp5Zfo+84hDXJ2Iyc5nWbb7rmKt/d+3iSx8LvltFXnfMqf9iGso4Nyb4/kvPQlLEMNckeyVeSzbUSVBhm1Ix8I5kR1DEwAq1r7OSKKicMuCe0Q+2X70imBZ+Ri3xdtjgg0BRA+OUrX0eSYc85Tn5X1hha3LV+RpZ19Lv8Nl6VsfiUnmeHvuFtyaH3ryhZmgbD667X3RUjaorwe/8Q3ovh3OWb5tWc3QAY01EVot/PjcsyNN92dwzG59Y38XX70v/slzfcDO7LGLaLUK+HyNDzodxsFqFNr47WRWijf3mfRZHHRaiqPC1GcqR4r/IyvgSarOOwOxw0OVdl5U+bA/No9e9i4CIsm/Mir2OongdNX4BkdbvZIDgdCmV9v3rYYljOpQfOwto/352M9+EGh3ua/YcOo6l0vJvPOmoZKNl9AW4cNUaAmcgYJxnGGWqFhG5CziUFp7jt2ADJKSAcExojRYMZKsBy3bMBigoNPRqSY4JxYsonI0XDSk2Zcb3Y4IJR6zTjHRpaAxVC2mnXGCca3EmK+cTJng2lqQYD0LGhQKL2kDCxMUo2rMYSBaCXoVxiweIc70sUhTJkkhpjrU/AcEwnZhChgGAoZfps4iyVCoyctoxRkjFPZAAztkeDSWqUFH3tKhijoKxQExvjZAMYliROy16GOqBG2EFpzAWnDox2k9YYKRxaGAqCDzkFS1knQUO/c8xBYSeoCY6RwmG4Rbnp9oIDT0Q5WNezgSflmFb0pDjGyQYwS53W+7MNAMwjqZi9Hn6yGA1iYmOcbGiBZxva2uFEFEnBthPDvqEkRYE6qdExsPHj6Q+sct+x4R0AAA=="
+ruby = "H4sIAAAAAAAACu2Y30/bMBDH/xXk52Kdf9t5mzpA3QRj0ImNaQ9mNTRSE3eNswmh/u9cnBbo+BOSp/gu9t3Z+chfx0/kwleBFGS+DEdX7d3j0XXwZELONrFdo/tb/dC1wgJ9pzEuSAETcu7r1q9yc+43DyGd+bQMm1kKVXbe+Md1LOvUkOLnE7mMTZnKWJPiiXwnhbWUO8vYhPwgBVdUccksWrekOFZWUGDA1RbtWIfZR1JoJibkyi/KFsPha0wf/4Yq1IkUOOwSU9+XNRaWNm2YkFmdwsb/TjdlWn7pxsOhbzddcuj9r0bo0mB5+Xmbn1hRs4z/9oOwL5Zz71fNm5w5ANZ0UsUU9rlxUXbND7nHzvjahia9bV+HP/3ixrud+zrF9TTWi11l6PlcrlbT2HZTR+sqtim8zme69Gkaq8p3i9E5unpvfJleC+2s07g5DNo552UVzpsD82T+fjFwEWbN5dLXKVYvQbsvQIq6Xa0QmwxCWT/MH9dYlnPdgIu4CC+9O+NTvMNw28k7NpjRVArgOR9zVFsudI+GtoxKDXwkY5BkHOPnBwPG5YSaIyaWK7VnQ1LFJBvZGCYbAjQVzvWSIjU1RinNezakBIqy4uwIxzDhMBKFQ3KRE1qgApWk1xSNAuOM5HpEY6BoME6ts1bv2QBroNcUoQCpMWbcNobJBuOcOgcc5AsbmQuuJRUW5WXcMwbJhXScKiVUv2UYQy1o0x81OKCeCJDjljFMNLiT+IeqoD9p4OECuOvJkILhscON/67DBIPhlZdkYHopQQHhoGwGQymOl2FcyVFNBkmGlI4ablXOpyxlDFBPMhoWz6bMsPEmdAhk/No+Aw0brDCIFwAA"
+yanx = "H4sIAAAAAAAACu2XzW7bMAzH30VnV9C3Jd+GrC2yoV3WZsjaYQd1URMDtpTF8rYiyLuXcpy2WR/BPpkkJPEv5gdS2aFrWztUoDvr/5UWZehyG9oNBL75VbLcEmIXISxRQTJ0ZX1rq86c2+3KxUsb1247ja7uggv7tAmljw0qfuzQLDRlLINHxQ59RwUTChOmhMjQXfKwyTUXKkP3qDgThGJG+B684N30IyoUhYU3dlm2cBrHKXv442rnIypohmaQ+bH0oCtuW5ehqY9ua3/FRRnXX9J+chrr74lOo/9JJCkNiOu+990XFDXr8Pe4CdaCnEdbNW9ydgeApvM6RHfMDTXpzQ/dit752romvrVv3e9DbcNDH76NYTMJftkrg8jnsqomoU1XB+8mtNG93meytnES6tqmYqRA0ruwZXwVmryLsD09NAXnZe2umhP3fP6+GFCEaTNbWx9D/XJo+gVQ4duqAmo6Dkq/mj9tQJYxacN1WLqX1cn5FB7guH32Dg1ODdZEsgMaXGEwad6TYSQ2WpkRjUGiQZXERGumuoRGYSMplwc0JCVYM0NHNAaJBswTTgQ18oCGwVSw/IiGAAGMjgNlmGicUcWxMprzLiOlHOfaKCIOdHAtsZZSjY1joHRA68gl6eEgacJI0ncOThS8RMXIxkDZEJJhIqTOD3AwjaXUxHRwcM0xk/AaGRvHMOFgIoc/Koz2UyXHPIcp07Eh0wOEUDY2jiGw8XP/DApriwA7EQAA"
+azim = "H4sIAAAAAAAACu2Z224bIRBAfyXi2Yu4X/YtcpPIrZKmiav0oj5sahKv5F1cL9sqjfLvHVznYvwJ8GRmDMPAHsHM8Igums6hGs2X7uj4b9sdXQe3Xjs0QWcbP67hn8/9fWy5BehOvV+gmkzQedOPzWrbnDebexfOmrB0m1lw3VZ50zysfduHAdXfH9GlH9rQ+h7Vj+gLqistJSZcSzFBX1FNJcEw5Bu0qMTWWsOeQPS9m71DtWJsgq6aRTuCLR47nvvfrnN9gP4TdAnz3rU9eBU2o5ugWR/cpvkZbtqw/BjHk33dbrloX5s4uPUHPHv2C37Bo2Hp/zwPgr7gzl2zGt7MuTUAPp10PrjnuWFHds3jbY+d8Gl0Q3jbvna//u+sv92pr4NfT32/2HkGmg/tajX1Y1w6SFd+DO51PdNlE6a+65q4GVER/b1p2vDqaJRO/WbfaFTO286dD3viyfxwM2ATZsPlsumD716Mxi+A6n5crYCZLQVtfz9/AIZqa+OAC79wL72j8N7fgrmnySEYinHMiLIHXBBsCdGqcJEnF9JyzCVRMgVDUiytpLKAkScYwhisNdwbCRjMaEyV4LqAkScYXAtsqDI8BUNbbAUjpoCRKRicYU61ZgkYHMAwjIrCRZ5cUC0xN0SphAtpKGashJ65piQac82FsWmuqgjBlHFazossuaCWYsM10SkWMVVVsmCRKxYCEyPT4EIYgoWCNKWcFlliwYTCWhiaJiOMYaEFLfXOTLGQDBtFZZqkVpRAvUsYxst5kSUYQAJ8/oMctYLaOCaalOgiTywqKGhB9YqYNEmtYtwhiSUlwMiUDEEYZlofksEUx5QKUQpbmZLBIfa0DG6OlAwJqSo1zJRX1UzJoEZAcUuRtLRVSQ7pimYFjDzBgHI3VkqZ9FG1kgbyVU5tiTLyBCPWvAmxBzcJVxpLQ3R5VM2Bix9P/wCrWfeuNigAAA=="
+
 
 -- A Ranks --
 if expansion == "DT" then
@@ -114,18 +124,18 @@ a10 = "Grassman"
 a11 = "Rusalka"
 a12 = "Baal"
 elseif expansion == "SB" then
-a1 = "Orcus"
-a2 = "Erle"
+a1 = "Erle"
+a2 = "Orcus"
 a3 = "Vochstein"
 a4 = "Aqrabuamelu"
-a5 = "Funa Yurei"
-a6 = "Oni Yumemi"
-a7 = "Gajasura"
-a8 = "Angada"
-a9 = "Girimekhala"
-a10 = "Sum"
-a11 = "Mahisha"
-a12 = "Luminare"
+a5 = "Mahisha"
+a6 = "Luminare"
+a7 = "Funa Yurei"
+a8 = "Oni Yumemi"
+a9 = "Gajasura"
+a10 = "Angada"
+a11 = "Girimekhala"
+a12 = "Sum"
 else
 yield("/echo Unsupported Expansion")
 end
@@ -153,12 +163,12 @@ z4 = 816 --Il Mheg
 z5 = 817 --The Rak'tika Greatwood
 z6 = 818 --The Tempest
 elseif expansion == "SB" then
-z1 = 0
-z2 = 0
-z3 = 0
-z4 = 0
-z5 = 0
-z6 = 0
+z1 = 612 --The Fringes
+z2 = 620 --The Peaks
+z3 = 621 --The Lochs
+z4 = 613 --The Ruby Sea
+z5 = 614 --Yanxia
+z6 = 622 --The Azim Steppe
 end
 
 mob1 = false
@@ -183,6 +193,14 @@ function startRoute(routeName, mobOne, mobTwo)
 		if DoesObjectExist(mobOne) then mob1 = true end
 		if DoesObjectExist(mobTwo) then mob2 = true end
 		if mob1 and mob2  then canSkip = true end
+		if mob1 and IsInZone(612) then --Fringes Optimisation
+			yield("/visland stop")
+			yield("/visland exectemponce " .. fringe2)
+			yield("/visland resume")
+			mob1 = false
+			yield("/wait 10")
+		end
+		if mob2 and IsInZone(612) then canSkip = true end
 		yield("/wait 0.2567")
 		if canSkip then
 			yield("/visland stop")
@@ -192,6 +210,7 @@ function startRoute(routeName, mobOne, mobTwo)
 end
 
 function tele(destination, zoneID)
+	previousZone = GetZoneID()
 	::teleStart::
 	if IsVislandRouteRunning() or PathIsRunning() then
 		yield("/visland stop")
@@ -212,6 +231,10 @@ function tele(destination, zoneID)
 		mob1 = false
 		mob2 = false
 		canSkip = false
+	end
+	if previousZone ~= GetZoneID() then
+		mob1 = false
+		mob2 = false
 	end
 end
 
@@ -379,7 +402,26 @@ if canRun then
 		tele("ondo", z6)
 		startRoute(temp, a11, a12)
 	elseif expansion == "SB" then
-
+		-- Zone 1 --
+		tele("oriens", z1)
+		startRoute(fringe1, a1, a2)
+		canSkip = false
+		startRoute(fringe2, a1, a2)		
+		-- Zone 2 --
+		tele("ghiri", z2)
+		startRoute(peaks, a3, a4)
+		-- Zone 3 --
+		tele("porta", z3)
+		startRoute(lochs, a5, a6)
+		-- Zone 4 --
+		tele("onok", z4)
+		startRoute(ruby, a7, a8)
+		--Zone 5 --
+		tele("fierce", z5)
+		startRoute(yanx, a9, a10)
+		-- Zone 6 --
+		tele("dhoro", z6)
+		startRoute(azim, a11, a12)
 	end
 	if gohome then
 		yield("/tp " .. homeTP)
