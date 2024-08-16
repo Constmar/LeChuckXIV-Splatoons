@@ -8,6 +8,7 @@ contains a modified instance change script courtesy of Prawellp's FATE script
 Requirements:
 VIsland for routes
 VNavMesh for pathing
+Teleporter
 
 Soft Requirement:
 Something to auto track hunt marks, "hunt helper" recommended
