@@ -1,14 +1,13 @@
 --[[
 
 Hunt Scouter
-v1.4
+v1.4a
 By LechuckXIV
 contains a modified instance change script courtesy of Prawellp's FATE script
 
 Requirements:
 VIsland for routes
 VNavMesh for pathing
-Teleporter
 
 Soft Requirement:
 Something to auto track hunt marks, "hunt helper" recommended
@@ -19,6 +18,7 @@ Ensure you're recording a train
 Start script, it will teleport you to the start and run it until it finishes
 
 Changelog:
+1.4a Add dependency check
 1.4 Added Shadwobringers support (full route not tested)
 1.3 Added Endwalker support (full route not tested)
 1.2b enter house
@@ -162,8 +162,17 @@ end
 mob1 = false
 mob2 = false
 canSkip = false
+canRun = false
 
 -- Setup --
+function checkDeps()
+	deps = 0
+	if HasPlugin("TeleporterPlugin") then deps = deps + 1 end
+	if HasPlugin("visland") then deps = deps + 1 end
+	if HasPlugin("vnavmesh") then deps = deps + 1 end
+	if deps == 3 then canRun = true end	
+end
+
 function startRoute(routeName, mobOne, mobTwo)
     yield("/visland exectemponce " .. routeName)
     yield("/visland resume")
@@ -247,6 +256,8 @@ canSkip = false
 end
 
 -- Starts Here --
+checkDeps()
+if canRun then
 if expansion == "DT" then
 	-- Zone 1 --
 	for i=1,maxInstances,1 do
@@ -377,4 +388,7 @@ if gohome then
 		yield("/target Entrance")
 		yield("/interact")
 	end
+end
+else
+	yield("/echo Dependencies not met, verify they are installed and enabled")
 end
