@@ -322,14 +322,14 @@ if expansion == "DT" then
 elseif expansion == "EW" then
 	-- Zone 1 --
 	tele("Arche", z1)
-	startRoute(lab1, a3, a4)
+	startRoute(lab1, a1, a2)
 	if not canSkip then
-	tele("Sharlayan Hamlet", z2)
-	startRoute(lab2, a3, a4)
+	tele("Sharlayan Hamlet", z1)
+	startRoute(lab2, a1, a2)
 	end
 	-- Zone 2 --
 	tele("Yedli", z2)
-	startRoute(thav, a1, a2)
+	startRoute(thav, a3, a4)
 	-- Zone 3 --
 	tele("Camp Broken Glass", z3)
 	startRoute(garl, a5, a6)
