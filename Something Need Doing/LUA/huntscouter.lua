@@ -1,7 +1,7 @@
 --[[
 
 Hunt Scouter
-v1.5
+v1.5a
 By LechuckXIV
 contains a modified instance change script courtesy of Prawellp's FATE script
 
@@ -19,6 +19,7 @@ Ensure you're recording a train
 Start script, it will teleport you to the start and run it until it finishes
 
 Changelog:
+1.5a remove fringes optimisation, breaks if 2nd mob isn't found and loops
 1.5 Added Stormblood, add a check to see if zone changed with only one A rank found
 1.4b fix canSkip check to work on tp and instance change, veried that EW/ShB routes are working
 1.4a Add dependency check
@@ -193,14 +194,6 @@ function startRoute(routeName, mobOne, mobTwo)
 		if DoesObjectExist(mobOne) then mob1 = true end
 		if DoesObjectExist(mobTwo) then mob2 = true end
 		if mob1 and mob2  then canSkip = true end
-		if mob1 and IsInZone(612) then --Fringes Optimisation
-			yield("/visland stop")
-			yield("/visland exectemponce " .. fringe2)
-			yield("/visland resume")
-			mob1 = false
-			yield("/wait 10")
-		end
-		if mob2 and IsInZone(612) then canSkip = true end
 		yield("/wait 0.2567")
 		if canSkip then
 			yield("/visland stop")
@@ -405,7 +398,6 @@ if canRun then
 		-- Zone 1 --
 		tele("oriens", z1)
 		startRoute(fringe1, a1, a2)
-		canSkip = false
 		startRoute(fringe2, a1, a2)		
 		-- Zone 2 --
 		tele("ghiri", z2)
