@@ -2,7 +2,7 @@
 
 	Simple Island Sanctuary Leveling
 	By LeChuckXIV
-	v0.1
+	v0.2
 	
 	inspired by ice's version, but actually works
 	
@@ -83,6 +83,7 @@ function sell()
 end
 ::start::
 updateCount()
+if (stone or iron or quartz or leucogranite) >= maxItems then sell() end
 if not GetCharacterCondition(4) then yield('/gaction "mount roulette"') end
 yield("/wait 3")
 if GetCharacterCondition(4) == true then
@@ -95,5 +96,4 @@ while (stone or iron or quartz or leucogranite) <= maxItems do
 	while IsVislandRouteRunning() do yield("/wait 1.234") end
 	updateCount()
 end
-if (stone or iron or quartz or leucogranite) >= maxItems then sell() end
 goto start
