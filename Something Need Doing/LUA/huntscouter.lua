@@ -1,7 +1,7 @@
 --[[
 
 Hunt Scouter
-v1.6
+v1.7
 By LechuckXIV
 contains a modified instance change script courtesy of Prawellp's FATE script
 
@@ -20,7 +20,8 @@ Ensure you're recording a train
 Start script, it will teleport you to the start and run it until it finishes
 
 Changelog:
-1.6 7.1 prep and variable instance counts per zone, DT only. Changed home tp to use lifestream, configure a path to your door with it if you want to go inside
+1.7 7.1 release, changed to use IPC for routes due to issues with chat commands, instance change optimisation for zones with only 1
+1.6 7.1 prep and variable instance counts per zone, DT only, changed home tp to use lifestream, configure a path to your door with it if you want ot go inside
 1.5a remove fringes optimisation, breaks if 2nd mob isn't found and loops
 1.5 Added Stormblood, add a check to see if zone changed with only one A rank found
 1.4b fix canSkip check to work on tp and instance change, veried that EW/ShB routes are working
@@ -35,16 +36,16 @@ Changelog:
 
 ]]--
 
-gohome = true
-homeType = "fc" --Lifestream destination type: home/fc/auto/apt etc...
+gohome = true --If you're not on your home world/DC it will transfer you to it, be careful
+homeType = "fc" --Lifestream destination type: home/fc/auto/apt etc... 
 expansion = "DT" --DT/EW/ShB/SB Supported (case sensitve)
 
 -- Set Instance Counts per zone, only applies to DT
 z1_Instances = 1
-z2_Instances = 1
+z2_Instances = 3
 z3_Instances = 1
-z4_Instances = 1
-z5_Instances = 1
+z4_Instances = 2
+z5_Instances = 2
 z6_Instances = 1
 
 
@@ -196,7 +197,7 @@ if deps == 4 then canRun = true end
 end
 
 function startRoute(routeName, mobOne, mobTwo)
-    yield("/visland exectemponce " .. routeName)
+    VislandStartRoute(routeName, true)
     yield("/visland resume")
     yield("/wait 0.2")
     while IsVislandRouteRunning() do
@@ -292,13 +293,13 @@ if canRun then
 		-- Zone 1 --
 		for i=1,z1_Instances,1 do
 			tele("Wachunpelo", z1)
-			changeInstance(i, z1)
+			if z1_Instances > 1 then changeInstance(i, z1) end
 			startRoute(wachu1, a1, a2)
 		end
 		-- Zone 2 --
 		for i=1,z2_Instances,1 do
 			tele("Earthenshire", z2)
-			changeInstance(i, z2)
+			if z2_Instances > 1 then changeInstance(i, z2) end
 			startRoute(koza1, a3, a4)
 			if not canSkip then
 				tele("hanu", z2)
@@ -312,7 +313,7 @@ if canRun then
 		-- Zone 3 --
 		for i=1,z3_Instances,1 do
 			tele("Mamook", z3)
-			changeInstance(i, z3)
+			if z3_Instances > 1 then changeInstance(i, z3) end
 			startRoute(yak1, a5, a6)
 			if not canSkip then
 				tele("Iq", z3)
@@ -322,7 +323,7 @@ if canRun then
 		-- Zone 4 --
 		for i=1,z4_Instances,1 do
 			tele("HHus", z4)
-			changeInstance(i, z4)
+			if z4_Instances > 1 then changeInstance(i, z4) end
 			startRoute(shaa1, a7, a8)
 			if not canSkip then
 				tele("Mehw", z4)
@@ -332,7 +333,7 @@ if canRun then
 		--Zone 5 --
 		for i=1,z5_Instances,1 do
 			tele("Outsk", z5)
-			changeInstance(i, z5)
+			if z5_Instances > 1 then changeInstance(i, z5) end
 			startRoute(hf1, a9, a10)
 			if not canSkip then
 				tele("Electrope", z5)
@@ -342,7 +343,7 @@ if canRun then
 		-- Zone 6 --
 		for i=1,z6_Instances,1 do
 			tele("Mnemo", z6)
-			changeInstance(i, z6)
+			if z6_Instances > 1 then changeInstance(i, z6) end
 			startRoute(lm1, a11, a12)
 			if not canSkip then
 				tele("Aero", z6)
